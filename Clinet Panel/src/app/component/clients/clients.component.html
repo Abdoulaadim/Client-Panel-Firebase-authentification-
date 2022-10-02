@@ -1,0 +1,35 @@
+<div class="row m-3">
+    <div class="col-md6">
+        <a routerLink="/client/add" class="btn btn-success"> <i class="fa fa-plus" aria-hidden="true"></i> New Client</a>
+    </div>
+    <div class="col-md6">
+        <h4 class="text-end"> Total : {{total | currency : "USD" : "symbol" }}</h4>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">List Clients</h4>
+        <input (keyup)="searchClient()" [(ngModel)]="search" placeholder="Search..." type="text" class="form-control my-2">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients" (dblclick)="deleteClient(client.id)">
+                    <td scope="row"> {{client.lastName}} {{client.firstName}}</td>
+                    <td>{{client.phone}}</td>
+                    <td>{{client.balance | currency: 'USD' : 'symbol'}}</td>
+                    <td class="text-end">
+                        <a routerLink="/client/{{client.id}}" class="btn btn-info mx-2"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <a routerLink="/client/edit/{{client.id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
